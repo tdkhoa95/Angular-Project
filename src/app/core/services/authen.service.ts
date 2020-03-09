@@ -14,22 +14,22 @@ export class AuthenService {
   login(userName: string, password: string) {
     let header = new HttpHeaders()
     header.set('Content-Type', 'application/x-www-form-urlencoded');
-    let body = 'username = ' + encodeURIComponent(userName) + '&password = ' + encodeURIComponent(password) + '&grant_type = password';
+    let body = 'username=' + encodeURIComponent(userName) + '&password=' + encodeURIComponent(password) + '&grant_type=password';
     let promise = new Promise((resolve, reject) => {
-      this._http.post(environment.BASE_API + 'api/oauth/token', body, { headers: header }).subscribe((response: any) => {
-        const user: LoginUser = response.json();
-        console.log(user);
-        if (user && user.access_token) {
-          localStorage.removeItem(SystemConstants.CURRENT_USER);
-          localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
-          resolve(true);
-        }
-        else {
-          reject(false);
-        }
-      }, error => {
-        reject(error)
-      });
+      this._http.post(environment.BASE_API + '/api/oauth/token', body, { headers: header })
+        .subscribe((response: any) => {
+          const user: LoginUser = response;
+          if (user && user.access_token) {
+            localStorage.removeItem(SystemConstants.CURRENT_USER);
+            localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
+            resolve(true);
+          }
+          else {
+            reject(false);
+          }
+        }, error => {
+          reject(error);
+        });
     });
     return promise;
   }
