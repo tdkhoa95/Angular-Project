@@ -15,7 +15,7 @@ export class DataService {
   constructor(private _http: HttpClient, private _authService: AuthenService,
     private _notificationSerivce: NotificationService, private _utilityService: UtilityService) {
     this.headers = this.headers.set('Content-Type', 'application/json');
-    this.headers = this.headers.set('Authorization', 'Bearer' + _authService.getLoginUser().access_token);
+    this.headers = this.headers.set('Authorization', 'Bearer ' + _authService.getLoginUser().access_token);
   }
 
   get(uri: string) {

@@ -20,6 +20,7 @@ export class AuthenService {
         .subscribe((response: any) => {
           const user: LoginUser = response;
           if (user && user.access_token) {
+            // Set local storage
             localStorage.removeItem(SystemConstants.CURRENT_USER);
             localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
             resolve(true);
