@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  BASE_API: 'http://windows.local/'
+  // BASE_API: 'http://windows.local/',
+  BASE_API: 'http://tedushopapi.tedu.com.vn'
 };
 
 /*
